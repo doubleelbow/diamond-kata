@@ -1,10 +1,10 @@
-(ns com.doubleelbow.diamond-kata-test
+(ns diamond-kata-test
   (:require [clojure.string :as str]
             [clojure.test.check :as tc]
             [clojure.test.check.generators :as gen]
             [clojure.test.check.properties :as prop]
             [clojure.test.check.clojure-test :refer :all]
-            [com.doubleelbow.diamond-kata :refer :all]))
+            [diamond-kata :refer :all]))
 
 (defn- gen-char [alphabet]
   (gen/elements alphabet))

@@ -8,7 +8,4 @@
                 {:git/url "https://github.com/cognitect-labs/test-runner"
                  :sha "f7ef16dc3b8332b0d77bc0274578ad5270fbfedd"}}
    :main-opts ["-m" "cognitect.test-runner"
-               "-d" "test"]}
-  :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "0.5.2"}}
-            :main-opts ["-m" "hf.depstar.uberjar" "diamond-kata.jar"
-                        "-C" "-m" "com.doubleelbow.diamond-kata"]}}}
+               "-d" "test"]}}}

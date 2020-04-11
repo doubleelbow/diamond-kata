@@ -1,46 +1,16 @@
 # diamond-kata
 
-FIXME: my new application.
-
-## Installation
-
-Download from https://github.com/com.doubleelbow/diamond-kata.
+This is one part of (knee-jerk) reaction to [St. Pauli school of TDD](https://www.tddstpau.li/). The other part can be found in [discussion about xDDs](https://clojureverse.org/t/when-is-it-appropriate-to-do-rdd-instead-of-tdd/5602).
 
 ## Usage
 
-FIXME: explanation
-
 Run the project directly:
 
-    $ clojure -m com.doubleelbow.diamond-kata
+    $ clojure -m diamond-kata
 
-Run the project's tests (they'll fail until you edit them):
+Run the project's tests:
 
     $ clojure -A:test:runner
-
-Build an uberjar:
-
-    $ clojure -A:uberjar
-
-Run that uberjar:
-
-    $ java -jar diamond-kata.jar
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 

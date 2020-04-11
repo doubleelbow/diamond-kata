@@ -1,4 +1,4 @@
-(ns com.doubleelbow.diamond-kata
+(ns diamond-kata
   (:gen-class))
 
 (defprotocol Diamond
@@ -78,14 +78,26 @@
 
 (defn diamond
   ([diamond-impl alphabet to-char]
-   (diamond diamond-impl alphabet to-char "_" "-"))
+   (diamond diamond-impl alphabet to-char " " " "))
   ([diamond-impl alphabet to-char outside-space-char inside-space-char]
    (dmnd diamond-impl alphabet to-char outside-space-char inside-space-char)))
 
+(defn- print-diamond [d]
+  (println
+   (clojure.string/join "\n" d)))
+
 (defn -main
-  "I don't do a whole lot ... yet."
+  "I don't do a whole lot ... yet. And never will."
   [& args]
-  (println "Hello, World!"))
+  (let [alphabet [\a \b \c \d \e \f \g]
+        chr \g
+        d1 (diamond (->Impl1) alphabet chr)
+        d2 (diamond (->Impl2) alphabet chr)]
+    (do
+      (println "Implementation 1")
+      (print-diamond d1)
+      (println "Implementation 2")
+      (print-diamond d2))))
 
 (comment
   (def alphabet [\a \b \c \d \e \f \g])
@@ -100,4 +112,6 @@
 
   (line {:char \b :outside 1 :inside 1} "_" "-")
  
-  (diamond (->Impl2) alphabet \g))
+  (diamond (->Impl2) alphabet \g)
+
+  (print-diamond (diamond (->Impl1) alphabet \g)))
