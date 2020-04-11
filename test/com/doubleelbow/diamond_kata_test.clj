@@ -9,20 +9,20 @@
 (defn- gen-char [alphabet]
   (gen/elements alphabet))
 
-(defn- lines-count-equals-lines-length [alphabet]
+(defn- lines-count-equals-lines-length [diamond-impl alphabet]
   (prop/for-all [chr (gen-char alphabet)]
-                (let [d (diamond alphabet chr)
+                (let [d (diamond diamond-impl alphabet chr)
                       l (count d)]
                   (every? #(= (.length %) l) d))))
 
-(defn- vertical-symmetry [alphabet]
+(defn- vertical-symmetry [diamond-impl alphabet]
   (prop/for-all [chr (gen-char alphabet)]
-                (let [d (diamond alphabet chr)]
+                (let [d (diamond diamond-impl alphabet chr)]
                   (= d (reverse d)))))
 
-(defn- horizontal-symmetry [alphabet]
+(defn- horizontal-symmetry [diamond-impl alphabet]
   (prop/for-all [chr (gen-char alphabet)]
-                (let [d (diamond alphabet chr)]
+                (let [d (diamond diamond-impl alphabet chr)]
                   (every? #(= % (apply str (reverse %))) d))))
 
 (defn- half-line-structure [line chr]
@@ -46,21 +46,22 @@
 (defn- single-char-in-string? [s c]
   (every? #(= c %) s))
 
-(defn- upper-left [alphabet osc isc]
+(defn- upper-left [diamond-impl alphabet osc isc]
   (prop/for-all [chr (gen-char alphabet)]
-                (let [d (diamond alphabet chr osc isc)
+                (let [d (diamond diamond-impl alphabet chr osc isc)
                       ul (upper-left-structure alphabet d)]
                   (every? #(and (= (:length %) (+ (:char-position %) (:line %) 1))
                                 (single-char-in-string? (:left %) osc)
                                 (single-char-in-string? (:right %) isc))
                           ul))))
 
+(def test-diamond-impl (->Impl1))
 (def test-alphabet [\a \b \c \d \e \f \g \h \i \j \k \l \m \n \o \p \q \r \s \t \u \v \w \x \y \z])
 
-(defspec it-s-a-square 100 (lines-count-equals-lines-length test-alphabet))
+(defspec it-s-a-square 100 (lines-count-equals-lines-length test-diamond-impl test-alphabet))
 
-(defspec it-s-a-vertical-palindrom 100 (vertical-symmetry test-alphabet))
+(defspec it-s-a-vertical-palindrom 100 (vertical-symmetry test-diamond-impl test-alphabet))
 
-(defspec it-s-a-horizontal-palindrom 100 (horizontal-symmetry test-alphabet))
+(defspec it-s-a-horizontal-palindrom 100 (horizontal-symmetry test-diamond-impl test-alphabet))
 
-(defspec upper-left-props 100 (upper-left test-alphabet \_ \-))
+(defspec upper-left-props 100 (upper-left test-diamond-impl test-alphabet \_ \-))
